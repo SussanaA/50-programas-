@@ -38,44 +38,85 @@ class Program
 ### Código en ARM64 Assembly
 
 ~~~
-    // Programa: Celsius a Fahrenheit en ARM64 Assembly
-    // Autor: ChatGPT
-    // Fecha: 2024-11-05
-    // Descripción: Convierte grados Celsius a Fahrenheit usando la fórmula F = C * 9/5 + 32
-    // Entrada: Grados Celsius en x0
-    // Salida: Grados Fahrenheit en x0
 
-    .section .data
-    .section .text
-    .global _start
+#Programa: Celsius a Fahrenheit en ARM64 Assembly
+#Descripción: Convierte grados Celsius a Fahrenheit usando la fórmula F = C * 9/5 + 32
+#Entrada: Grados Celsius en x0
+#Salida: Grados Fahrenheit en x0
 
-_start:
-    // Multiplicamos el valor de Celsius en x0 por 9
-    MOV x1, x0            // Copiamos Celsius a x1
-    MOV x2, #9            // Constante 9 en x2
-    MUL x0, x1, x2        // x0 = Celsius * 9
+.data
+    // Mensajes para el usuario
+    msg_input: .string "Ingrese la temperatura en Celsius: "
+    msg_output: .string "La temperatura en Fahrenheit es: "
+    format_input: .string "%d"    // Formato para scanf
+    format_output: .string "%d\n"  // Formato para printf
 
-    // Dividimos el resultado por 5
-    MOV x2, #5            // Constante 5 en x2
-    SDIV x0, x0, x2       // x0 = (Celsius * 9) / 5
+.text
+.global main
+.align 2
 
-    // Sumamos 32 al resultado
-    ADD x0, x0, #32       // x0 = (Celsius * 9 / 5) + 32
+// Función principal
+main:
+    // Prólogo
+    stp     x29, x30, [sp, #-16]!    // Guardar frame pointer y link register
+    mov     x29, sp                   // Actualizar frame pointer
 
-    // Finalizamos el programa
-    MOV w8, #93           // Código de salida para syscall en Linux
-    SVC #0                // Llamada al sistema para salir
+    // Imprimir mensaje de entrada
+    adrp    x0, msg_input            // Cargar dirección del mensaje
+    add     x0, x0, :lo12:msg_input
+    bl      printf
+
+    // Leer temperatura en Celsius
+    sub     sp, sp, #16              // Reservar espacio en el stack
+    mov     x2, sp                   // Dirección donde guardar el input
+    adrp    x0, format_input         // Formato para scanf
+    add     x0, x0, :lo12:format_input
+    mov     x1, x2                   // Pasar dirección como segundo argumento
+    bl      scanf
+
+    // Cargar el valor ingresado
+    ldr     w0, [sp]                 // Cargar valor de Celsius
+
+    // Realizar la conversión: °F = (°C × 9/5) + 32
+    mov     w1, #9
+    mul     w0, w0, w1               // Multiplicar por 9
+    mov     w1, #5
+    sdiv    w0, w0, w1               // Dividir por 5
+    add     w0, w0, #32              // Sumar 32
+
+    // Imprimir mensaje de resultado
+    mov     w1, w0                   // Mover resultado a w1 para printf
+    adrp    x0, msg_output           // Cargar mensaje de salida
+    add     x0, x0, :lo12:msg_output
+    bl      printf
+
+    // Imprimir el resultado
+    mov     w1, w1                   // El resultado ya está en w1
+    adrp    x0, format_output        // Formato para imprimir el número
+    add     x0, x0, :lo12:format_output
+    bl      printf
+
+    // Epílogo
+    add     sp, sp, #16              // Liberar espacio del stack
+    mov     w0, #0                   // Retornar 0
+    ldp     x29, x30, [sp], #16      // Restaurar frame pointer y link register
+    ret
 
 ~~~
 
-----
+---
 
-#Comandos para la ejecución del porgrama
-##Ensamblar el código
-as -o celsius_to_fahrenheit.o celsius_to_fahrenheit.s
+# Comandos para ejecutar el programa
 
-##Vincular el archivo objeto
-ld -o celsius_to_fahrenheit celsius_to_fahrenheit.o
+## Ensamblar el código
+as -o programa1.o programa1.cs
 
-##Ejecutar el programa
-./celsius_to_fahrenheit
+## Vincular el archivo objeto
+ld -o programa1 programa1.o
+
+## Ejecutar el programa
+./programa1
+
+---
+
+
