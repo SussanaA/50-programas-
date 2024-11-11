@@ -3,52 +3,41 @@
 // Descripción: Este programa toma dos números enteros, los resta,
 //              y almacena el resultado en una variable de salida.
 // -----------------------------------------------------------------------------------------------------------
-### Descripción de la actividad:
-El objetivo de esta actividad es desarrollar un programa en 
-lenguaje ensamblador ARM64 que permita al usuario ingresar 
-dos números y luego realice su resta. 
 
----
-
-### Código en C#
-
-~~~
+//Código en C#
 using System;
 
-namespace RestaConsola
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Programa de Resta de Dos Números");
+//namespace RestaDeNumeros
+//{
+//    class Program
+//    {
+//        static void Main(string[] args)
+//        {
+              // Solicitar el primer número
+//            Console.Write("Ingrese el primer número: ");
+//            double numero1 = Convert.ToDouble(Console.ReadLine());
 
-            // Solicitar el primer número
-            Console.Write("Introduce el primer número: ");
-            string entrada1 = Console.ReadLine();
-            int numero1 = int.Parse(entrada1);
+              // Solicitar el segundo número
+//            Console.Write("Ingrese el segundo número: ");
+//            double numero2 = Convert.ToDouble(Console.ReadLine());
 
-            // Solicitar el segundo número
-            Console.Write("Introduce el segundo número: ");
-            string entrada2 = Console.ReadLine();
-            int numero2 = int.Parse(entrada2);
+              // Realizar la resta
+//            double resultado = numero1 - numero2;
 
-            // Realizar la resta
-            int resta = numero1 - numero2;
+              // Mostrar el resultado
+//            Console.WriteLine("El resultado de la resta es: " + resultado);
 
-            // Mostrar el resultado
-            Console.WriteLine("La resta de {0} y {1} es: {2}", numero1, numero2, resta);
-        }
-    }
-}
+              // Esperar a que el usuario presione una tecla para cerrar
+//            Console.WriteLine("Presione cualquier tecla para salir...");
+//            Console.ReadKey();
+//        }
+//    }
+//}
 
-~~~
+//--------------------------------------------------------------------------------------------
 
----
+//Código en ARM64 Assembly
 
-### Código en ARM64 Assembly
-
-~~~
    .global _start           // Define la etiqueta global para el punto de entrada
 
 .section .data
@@ -101,10 +90,10 @@ _start:
     ldr x1, =num2            // Cargar la dirección de `num2`
     str w0, [x1]             // Usar el registro `x1` como dirección para almacenar `w0`
 
-    // Realizar la suma
+    // Realizar la resta
     ldr w1,num1       // Cargar el primer número en w1
     ldr w2,num2       // Cargar el segundo número en w2
-    add w3, w1, w2       // Realizar la resta: w3 = w1 - w2
+    sub w3, w1, w2       // Realizar la resta: w3 = w1 - w2
 
     // Guardar el resultado en la variable result
     ldr x1, =result      // Cargar la dirección de la variable result
@@ -185,10 +174,8 @@ read_input:
     mov x8, 63                // Llamada al sistema sys_read
     svc 0                      // Ejecutamos la llamada al sistema
     ret
-
-~~~
-
----
+    
+//-----------------------------------------------------------------------------------
 
 # Comandos para ejecutar el programa
 
