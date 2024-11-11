@@ -88,8 +88,8 @@ _start:
     bl read_input        // Llamar a la función para leer la entrada
 
     // Realizar la suma
-    ldr w1, [num1]       // Cargar el primer número en w1
-    ldr w2, [num2]       // Cargar el segundo número en w2
+    ldr w1,num1       // Cargar el primer número en w1
+    ldr w2,num2       // Cargar el segundo número en w2
     add w3, w1, w2       // Realizar la suma: w3 = w1 + w2
 
     // Guardar el resultado en la variable result
@@ -102,7 +102,7 @@ _start:
     bl print_string      // Llamar a la función para imprimir el mensaje
 
     // Mostrar el resultado de la suma
-    ldr w0, [result]     // Cargar el resultado en w0
+    ldr w0,result     // Cargar el resultado en w0
     bl print_number      // Llamar a la función para imprimir el número
 
     // Terminar el programa
