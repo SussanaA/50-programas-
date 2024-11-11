@@ -1,56 +1,32 @@
-# Instituto Tecnológico de Tijuana
-# Departamento de Sistemas y Computación
-## Materia: Lenguajes de Interfaz
+// ------------------------------------------------------------
+// Nombre: Rodríguez Morales Susana Abigail
+// Descripción: Este programa toma dos números enteros, los suma,
+//              y almacena el resultado en una variable de salida.
+// -----------------------------------------------------------------------------------------------------------
 
-**Nombre del alumno:** Rodríguez Morales Susana Abigail  
-**No. control:** 22210346  
-**Nombre del programa:** Suma de dos números
-
-### Descripción de la actividad:
-En esta actividad se estará presentando los códigos utilizados
-para la ejecución de un programa que sume dos números
-
----
-
-### Código en C#
-
-~~~
-using System;
-
-namespace SumaConsola
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Programa de Suma de Dos Números");
+// Ejemplo en C# para referencia:
+//  Console.WriteLine("Programa de Suma de Dos Números");
 
             // Solicitar el primer número
-            Console.Write("Introduce el primer número: ");
-            string entrada1 = Console.ReadLine();
-            int numero1 = int.Parse(entrada1);
+//            Console.Write("Introduce el primer número: ");
+//            string entrada1 = Console.ReadLine();
+//            int numero1 = int.Parse(entrada1);
 
             // Solicitar el segundo número
-            Console.Write("Introduce el segundo número: ");
-            string entrada2 = Console.ReadLine();
-            int numero2 = int.Parse(entrada2);
+//            Console.Write("Introduce el segundo número: ");
+//            string entrada2 = Console.ReadLine();
+//            int numero2 = int.Parse(entrada2);
 
             // Realizar la suma
-            int suma = numero1 + numero2;
+//            int suma = numero1 + numero2;
 
             // Mostrar el resultado
-            Console.WriteLine("La suma de {0} y {1} es: {2}", numero1, numero2, suma);
-        }
-    }
-}
+//            Console.WriteLine("La suma de {0} y {1} es: {2}", numero1, numero2, suma);
+//--------------------------------------------------------------------------------------------------------------------
 
-~~~
 
----
+// Código en ensamblador ARM64
 
-### Código en ARM64 Assembly
-
-~~~
    .global _start           // Define la etiqueta global para el punto de entrada
 
 .section .data
