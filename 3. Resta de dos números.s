@@ -38,20 +38,21 @@ using System;
 
 //Código en ARM64 Assembly
 
-   .global _start           // Define la etiqueta global para el punto de entrada
+.global _start           // Define la etiqueta global para el punto de entrada
 
 .section .data
     prompt1:      .asciz "Ingresa el primer numero: "  // Mensaje para el primer número
     prompt2:      .asciz "Ingresa el segundo numero: " // Mensaje para el segundo número
-    result_msg:   .asciz "El resultado de la resta es: " // Mensaje para el resultado
+    result_msg:   .asciz "El resultado de la resta es: " // Mensaje modificado para la resta
 
 .section .bss
+    .align 4            // Asegura que la dirección de las variables esté alineada a 4 bytes
     num1:   .skip 4      // Reservamos espacio para el primer número
     num2:   .skip 4      // Reservamos espacio para el segundo número
     result: .skip 4      // Reservamos espacio para el resultado
-    buffer: .skip 12   ///////// Buffer temporal para almacenar el número en ASCII (suficiente para 10 dígitos y el null terminator)
+    buffer: .skip 12     // Buffer temporal para almacenar el número en ASCII
 
-.section .text
+  .section .text
 _start:
     // Mostrar mensaje "Ingresa el primer numero: "
     mov x0, 1            // Descriptor de archivo 1 (stdout)
@@ -60,16 +61,17 @@ _start:
 
     // Leer primer número
     mov x0, 0            // Descriptor de archivo 0 (stdin)
-    ldr x1, =num1        // Dirección de la variable donde guardar el número
+    adrp x1, num1       // Cargar la dirección base de la página de `num1`
+    add x1, x1, :lo12:num1 // Añadir el desplazamiento (offset) a la dirección
     mov x2, 4            // Leer 4 bytes (tamaño de un entero)
     bl read_input        // Llamar a la función para leer la entrada
     // Convertir primer número ASCII a entero
     ldr x1, =num1
     bl ascii_to_int
 
-    // Guardar entero en `num1`
-    ldr x1, =num1            // Cargar la dirección de `num1`
-    str w0, [x1]             // Usar el registro `x1` como dirección para almacenar `w0`
+      // Guardar entero en `num1`
+    ldr x1, =num1        // Cargar la dirección de `num1`
+    str w0, [x1]         // Usar el registro `x1` como dirección para almacenar `w0`
 
     // Mostrar mensaje "Ingresa el segundo numero: "
     mov x0, 1            // Descriptor de archivo 1 (stdout)
@@ -86,13 +88,13 @@ _start:
     ldr x1, =num2
     bl ascii_to_int
 
-    // Guardar entero en `num2`
-    ldr x1, =num2            // Cargar la dirección de `num2`
-    str w0, [x1]             // Usar el registro `x1` como dirección para almacenar `w0`
+      // Guardar entero en `num2`
+    ldr x1, =num2        // Cargar la dirección de `num2`
+    str w0, [x1]         // Usar el registro `x1` como dirección para almacenar `w0`
 
     // Realizar la resta
-    ldr w1,num1       // Cargar el primer número en w1
-    ldr w2,num2       // Cargar el segundo número en w2
+    ldr w1, num1         // Cargar el primer número en w1
+    ldr w2, num2         // Cargar el segundo número en w2
     sub w3, w1, w2       // Realizar la resta: w3 = w1 - w2
 
     // Guardar el resultado en la variable result
@@ -104,14 +106,14 @@ _start:
     ldr x1, =result_msg  // Cargar la dirección de la cadena de texto
     bl print_string      // Llamar a la función para imprimir el mensaje
 
-    // Convertir el resultado a cadena
-    ldr w0,result      // Cargar el resultado en w0
-    ldr x1, =buffer       // Pasar el buffer como destino
-    bl int_to_ascii       // Llamar a la función de conversión
+      // Convertir el resultado a cadena
+    ldr w0, result       // Cargar el resultado en w0
+    ldr x1, =buffer      // Pasar el buffer como destino
+    bl int_to_ascii      // Llamar a la función de conversión
 
     // Imprimir el número convertido
     mov x0, 1
-    mov x1, x1            // Buffer con el número en ASCII
+    mov x1, x1           // Buffer con el número en ASCII
     bl print_string
 
     // Terminar el programa
@@ -119,23 +121,22 @@ _start:
     mov x8, 93           // Código del sistema para terminar el programa (exit)
     svc 0                // Llamar al sistema
 
-// Función para convertir caracteres ASCII a entero
+  // Función para convertir caracteres ASCII a entero
 ascii_to_int:
     mov w2, #0                // Inicializamos el acumulador en 0
 parse_loop:
     ldrb w3, [x1], #1         // Leer un byte (dígito) y mover al siguiente
     subs w3, w3, #'0'         // Convertir el carácter ASCII al valor numérico
     blt parse_done            // Si no es un dígito, terminamos la conversión
-    mov w6, #10              // Mover 10 a w6 como multiplicador
-    mul w2, w2, w6           // Multiplicar `w2` por 10
-    mul w2, w2, w6             // Multiplicar acumulador por 10
+    mov w6, #10               // Mover 10 a w6 como multiplicador
+    mul w2, w2, w6            // Multiplicar acumulador por 10
     add w2, w2, w3            // Agregar el dígito convertido
     b parse_loop              // Repetir para el siguiente dígito
 parse_done:
     mov w0, w2                // El resultado está en w0
     ret
 
-// Función para convertir un entero en ASCII
+  // Función para convertir un entero en ASCII
 int_to_ascii:
     mov x2, x1               // Guardar la dirección del buffer en x2
     add x1, x1, 10           // Apuntar al final del buffer
@@ -152,7 +153,7 @@ convert_loop:
     mov x0, x2               // Retornar la dirección del buffer
     ret
 
-// Función para imprimir cadenas
+  // Función para imprimir cadenas
 print_string:
     mov x2, 0            // Longitud de la cadena, la computamos a mano o con un loop si es necesario
     find_null:
@@ -163,32 +164,33 @@ print_string:
         b find_null          // Continuamos buscando
     print_done:
     mov x0, 1                // Descriptor de archivo 1 (stdout)
-    mov x1, x1                // Dirección de la cadena
-    mov x2, x2                // Longitud de la cadena
-    mov x8, 64                // Llamada al sistema sys_write
-    svc 0                      // Ejecutamos la llamada al sistema
+    mov x1, x1               // Dirección de la cadena
+    mov x2, x2               // Longitud de la cadena
+    mov x8, 64               // Llamada al sistema sys_write
+    svc 0                    // Ejecutamos la llamada al sistema
     ret
 
-// Función para leer la entrada del usuario
+  // Función para leer la entrada del usuario
 read_input:
-    mov x8, 63                // Llamada al sistema sys_read
-    svc 0                      // Ejecutamos la llamada al sistema
+    mov x8, 63               // Llamada al sistema sys_read
+    svc 0                    // Ejecutamos la llamada al sistema
     ret
     
 //-----------------------------------------------------------------------------------
 
-# Comandos para ejecutar el programa
+// Comandos para ejecutar el programa
 
-## Ensamblar el código
-as -o resta.o resta.s
+// Ensamblar el código
+//  as -o resta.o resta.s
 
-## Vincular el archivo objeto
-ld -o resta resta.o
+// Vincular el archivo objeto
+//  ld -o resta resta.o
 
-## Ejecutar el programa
-./resta
+// Ejecutar el programa
+//  ./resta
 
-
+// Enlace de asciinema
+https://asciinema.org/a/688662
 
 
 
