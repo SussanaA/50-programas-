@@ -1,11 +1,8 @@
-# Instituto Tecnológico de Tijuana
-# Departamento de Sistemas y Computación
-## Materia: Lenguajes de Interfaz
-
-**Nombre del alumno:** Rodríguez Morales Susana Abigail  
-**No. control:** 22210346  
-**Nombre del programa:** Resta de dos números
-
+// ------------------------------------------------------------
+// Nombre: Rodríguez Morales Susana Abigail
+// Descripción: Este programa toma dos números enteros, los resta,
+//              y almacena el resultado en una variable de salida.
+// -----------------------------------------------------------------------------------------------------------
 ### Descripción de la actividad:
 El objetivo de esta actividad es desarrollar un programa en 
 lenguaje ensamblador ARM64 que permita al usuario ingresar 
