@@ -220,14 +220,21 @@ read_input:
 // Comandos para ejecutar el programa
 
 // Ensamblar el código
-as -o conv.o conv.cs
+// as -o conv.o conv.cs
 
-## Vincular el archivo objeto
+// Vincular el archivo objeto
 ld -o conv conv.o
 
-## Ejecutar el programa
-./conv
+// Ejecutar el programa
+//  ./conv
 
-/---------------------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------------------
+
+// Enlace de asciinema
+
+https://asciinema.org/a/0YxU1tf5KfKF6Fas9zUFWx2Ro
+
+
+
 
 
