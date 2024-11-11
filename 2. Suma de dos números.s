@@ -164,22 +164,23 @@ read_input:
     svc 0                      // Ejecutamos la llamada al sistema
     ret
 
-~~~
+//---------------------------------------------------------------------------
 
----
+// Comandos para ejecutar el programa
 
-# Comandos para ejecutar el programa
+// Ensamblar el código
+//  as -o suma.o suma.s
 
-## Ensamblar el código
-as -o suma.o suma.s
+// Vincular el archivo objeto
+//  ld -o suma suma.o
 
-## Vincular el archivo objeto
-ld -o suma suma.o
+// Ejecutar el programa
+//  ./suma
 
-## Ejecutar el programa
-./suma
+//---------------------------------------------------------------------------
 
-
+// Enlace de asciinema
+https://asciinema.org/a/688644
 
 
 
