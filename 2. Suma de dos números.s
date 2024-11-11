@@ -188,6 +188,20 @@ read_input:
     svc 0                      // Ejecutamos la llamada al sistema
     ret
 
+~~~
+
+---
+
+# Comandos para ejecutar el programa
+
+## Ensamblar el código
+as -o suma.o suma.s
+
+## Vincular el archivo objeto
+ld -o suma suma.o
+
+## Ejecutar el programa
+./suma
 
 
 
