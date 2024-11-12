@@ -1,8 +1,11 @@
-// ------------------------------------------------------------
-// Nombre: Rodríguez Morales Susana Abigail
-// Descripción: Este programa toma dos números enteros, los divide,
-//              y almacena el resultado en una variable de salida.
-// -----------------------------------------------------------------------------------------------------------
+// Instituto Tecnológico de Tijuana
+// Departamento de Sistemas y Computación
+// Materia: Lenguajes de Interfaz
+
+// Nombre del alumno:** Rodríguez Morales Susana Abigail  
+// No. control:** 22210346  
+
+//---------------------------------------------------------------------------------------------------------------------------------
 
 // Ejemplo en C# para referencia:
 //using System;
