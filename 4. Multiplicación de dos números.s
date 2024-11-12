@@ -198,8 +198,9 @@ read_input:
 //---------------------------------------------------------------------------
 
 // Enlace de asciinema
-https://asciinema.org/a/k6saow3do1QtPXFxB9gDGUjDR 
+https://asciinema.org/a/YOQycr2X9eh9L5wNYTlN7aRda
 
 
 
 
+-
