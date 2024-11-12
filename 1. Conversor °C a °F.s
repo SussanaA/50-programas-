@@ -231,7 +231,7 @@ ld -o conv conv.o
 
 // Enlace de asciinema
 
-https://asciinema.org/a/0YxU1tf5KfKF6Fas9zUFWx2Ro
+https://asciinema.org/a/xlIXSAMINE5KwXfbSHbxzclHb
 
 
 
@@ -239,5 +239,3 @@ https://asciinema.org/a/0YxU1tf5KfKF6Fas9zUFWx2Ro
 
 
 -
-
-
