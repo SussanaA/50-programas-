@@ -4,10 +4,6 @@
 
 // Nombre del alumno:** Rodríguez Morales Susana Abigail  
 // No. control:** 22210346  
-// Nombre del programa:** Convertir temperatura de Celsius a Fahrenheit  
-
-// Descripción de la actividad:
-//En esta actividad se elaborará un programa que convierte de grados Celsius a grados Fahrenheit en lenguaje ARM64 y lenguaje C#.
 
 //-------------------------------------------------------------------------------------------------------------------------------------
 
