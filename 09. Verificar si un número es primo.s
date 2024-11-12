@@ -21,7 +21,7 @@
 // Comandos para ejecutar el programa
 
 // Ensamblar el código
-// as -o primo.o primo.cs
+// as -o primo.o primo.s
 
 // Vincular el archivo objeto
 // ld -o primo primo.o
