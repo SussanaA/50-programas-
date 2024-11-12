@@ -2,8 +2,8 @@
 // Departamento de Sistemas y Computación
 // Materia: Lenguajes de Interfaz
 
-// Nombre del alumno:** Rodríguez Morales Susana Abigail  
-// No. control:** 22210346  
+// Nombre del alumno:** Rodríguez Morales Susana Abigail
+// No. control:** 22210346
 
 //-------------------------------------------------------------------------------------------------------------------------------------
 
@@ -52,3 +52,30 @@
 //-----------------------------------------------------------------------------------------------------------------
 
 // Código en ARM64 Assembly
+
+
+
+//--------------------------------------------------------------------------------------------------------------
+
+// Comandos para ejecutar el programa
+
+// Ensamblar el código
+// as -o fib.o fib.cs
+
+// Vincular el archivo objeto
+// ld -o fib fib.o
+
+// Ejecutar el programa
+//  ./fib
+
+//---------------------------------------------------------------------------------------------------------------------------------------
+
+// Enlace de asciinema
+
+
+
+
+
+
+
+-
