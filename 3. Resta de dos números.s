@@ -190,10 +190,11 @@ read_input:
 //  ./resta
 
 // Enlace de asciinema
-https://asciinema.org/a/688662
+https://asciinema.org/a/xLtEt5k926rRWS5KtqQXHFhhO
 
 
 
 
 
-    
+
+-
