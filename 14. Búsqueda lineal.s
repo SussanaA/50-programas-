@@ -18,19 +18,19 @@
 // Comandos para ejecutar el programa
 
 // Ensamblar el código
-// as -o busq.o busq.s
+// as -o lin.o lin.s
 
 // Vincular el archivo objeto
-// ld -o busq busq.o
+// ld -o lin lin.o
 
 // Ejecutar el programa
-//  ./busq
+//  ./lin
 
 //--------------------------------------------------------------------------------------------------------------
 
 // Comandos para ejecutar en gdb
 
-// gdb -q busq
+// gdb -q lin
 
 // start
 
