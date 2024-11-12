@@ -61,7 +61,7 @@
 // as -o fact.o fact.cs
 
 // Vincular el archivo objeto
-ld -o fact fact.o
+// ld -o fact fact.o
 
 // Ejecutar el programa
 //  ./fact
