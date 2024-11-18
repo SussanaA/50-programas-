@@ -1,5 +1,5 @@
 En esta actividad se estará reutilizando la actividad 2, ya que para realizar la suma
-se necesito de realizar una conversion de entero a ASCII.
+se necesito de realizar una conversion de ASCII a entero.
 
 //-------------------------------------------------------------------------------------------------------------------------------------
 // Instituto Tecnológico de Tijuana
