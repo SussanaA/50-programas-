@@ -102,7 +102,7 @@
     msg_input_cols1:    .string "Ingrese el numero de columnas de la primera matriz:\n"
     msg_input_rows2:    .string "Ingrese el numero de filas de la segunda matriz:\n"
     msg_input_cols2:    .string "Ingrese el numero de columnas de la segunda matriz:\n"
-    msg_error:          .string "La multiplicacion no es posible. El numero de columnas de la primera matriz debe coincidir con el numero de fi>
+    msg_error:          .string "La multiplicacion no es posible. El numero de columnas de la primera matriz debe coincidir con el numero de filas de la segunda matriz.\n"
     msg_input_matrix1:  .string "Ingrese los elementos de la primera matriz:\n"
     msg_input_matrix2:  .string "Ingrese los elementos de la segunda matriz:\n"
     msg_element:        .string "Elemento [%d,%d]: "
@@ -111,6 +111,7 @@
     msg_space:          .string " "
     format_input:       .string "%d"
     format_output:      .string "%d "
+    
     // Matrix storage
     .align 4
     matrix1:     .skip 400    // Space for 10x10 matrix (400 bytes)
@@ -140,13 +141,14 @@ main:
     ldr x1, =filas1
     bl scanf
 
-    // Input dimensions for second matrix
     ldr x0, =msg_input_cols1
     bl printf
     
     ldr x0, =format_input
     ldr x1, =columnas1
     bl scanf
+
+    // Input dimensions for second matrix
     ldr x0, =msg_input_rows2
     bl printf
     
@@ -160,6 +162,7 @@ main:
     ldr x0, =format_input
     ldr x1, =columnas2
     bl scanf
+
     // Validate matrix dimensions
     ldr x0, =columnas1
     ldr w0, [x0]
@@ -176,6 +179,7 @@ main:
     
     // Print result
     bl print_result
+    
     // Exit program
     mov w0, #0
     ldp x29, x30, [sp], #16
@@ -234,9 +238,48 @@ input_matrix1_next_row:
     b input_matrix1_outer
 
 input_matrix2_start:
-    // Similar code for matrix2 input
-    // [Matrix 2 input code would go here]
+    // Input for second matrix
+    ldr x0, =msg_input_matrix2
+    bl printf
     
+    mov x19, #0  // i counter
+input_matrix2_outer:
+    ldr x0, =filas2
+    ldr w0, [x0]
+    cmp w19, w0
+    b.ge input_matrices_end
+    
+    mov x20, #0  // j counter
+input_matrix2_inner:
+    ldr x0, =columnas2
+    ldr w0, [x0]
+    cmp w20, w0
+    b.ge input_matrix2_next_row
+    // Print element prompt
+    ldr x0, =msg_element
+    mov w1, w19
+    mov w2, w20
+    bl printf
+    
+    // Read element
+    ldr x0, =format_input
+    ldr x1, =matrix2
+    mov x2, x19
+    ldr x3, =columnas2
+    ldr w3, [x3]
+    mul x2, x2, x3
+    add x2, x2, x20
+    lsl x2, x2, #2
+    add x1, x1, x2
+    bl scanf
+    add x20, x20, #1
+    b input_matrix2_inner
+    
+input_matrix2_next_row:
+    add x19, x19, #1
+    b input_matrix2_outer
+
+input_matrices_end:
     ldp x19, x20, [sp], #16
     ldp x29, x30, [sp], #16
     ret
@@ -396,7 +439,7 @@ print_end:
 //----------------------------------------------------------------------------------------------------------------------------
 // Enlace de asciinema
 
-
+https://asciinema.org/a/9UL1nnkPwdaBlv9JJQe2YGfJY
 
 
 
