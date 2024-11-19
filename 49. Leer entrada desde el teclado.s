@@ -38,9 +38,9 @@
 // Código en ensamblador ARM64
 
 .data
-prompt:     .string "Introduce algo: "
+prompt:     .string "Ingresar un valor : "
 format_in:  .string "%255s"             // Límite de 255 caracteres
-format_out: .string "Has introducido: %s\n"
+format_out: .string "Se ha introducido: %s\n"
 buffer:     .space 256                  // Buffer para la entrada
 
         .text
