@@ -9,6 +9,36 @@
 //----------------------------------------------------------------------------------------------------------------------
 // Código en C#
 
+// using System;
+// using System.IO;
+
+// class Program
+// {
+//     static void Main()
+//     // {
+//     //     // Solicitar al usuario el nombre del archivo
+//     //     Console.Write("Ingrese el nombre del archivo (con extensión .txt): ");
+//     //     string archivo = Console.ReadLine();
+
+//     //     // Solicitar al usuario el texto que desea escribir en el archivo
+//     //     Console.Write("Ingrese el texto que desea escribir en el archivo: ");
+//     //     string texto = Console.ReadLine();
+
+//     //     try
+//     //     {
+//     //         // Escribir el texto en el archivo
+//     //         File.WriteAllText(archivo, texto);
+
+//     //         // Confirmar que el texto se ha guardado correctamente
+//     //         Console.WriteLine($"El texto se ha guardado en el archivo {archivo}.");
+//     //     }
+//     //     catch (Exception ex)
+//     //     {
+//     //         // Manejar cualquier error que ocurra durante el proceso
+//     //         Console.WriteLine($"Ocurrió un error al escribir en el archivo: {ex.Message}");
+//     //     }
+//     // }
+// }
 
 
 //----------------------------------------------------------------------------------------------------------------------
