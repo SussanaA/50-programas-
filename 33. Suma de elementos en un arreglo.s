@@ -9,6 +9,45 @@
 //----------------------------------------------------------------------------------------------------------------------
 // Código en C#
 
+// using System;
+
+// namespace SumaElementosArreglo
+// {
+//     class Program
+//     {
+//         static void Main(string[] args)
+//         {
+//             // Solicitar el tamaño del arreglo
+//             Console.Write("Ingrese el tamaño del arreglo: ");
+//             int tamaño = Convert.ToInt32(Console.ReadLine());
+
+//             // Declarar el arreglo
+//             int[] arreglo = new int[tamaño];
+
+//             // Solicitar los elementos del arreglo
+//             Console.WriteLine("Ingrese los elementos del arreglo:");
+//             for (int i = 0; i < tamaño; i++)
+//             {
+//                 Console.Write($"Elemento {i + 1}: ");
+//                 arreglo[i] = Convert.ToInt32(Console.ReadLine());
+//             }
+
+//             // Calcular la suma de los elementos
+//             int suma = 0;
+//             for (int i = 0; i < tamaño; i++)
+//             {
+//                 suma += arreglo[i];
+//             }
+
+//             // Mostrar el resultado
+//             Console.WriteLine($"La suma de los elementos del arreglo es: {suma}");
+
+//             // Esperar a que el usuario presione una tecla para salir
+//             Console.WriteLine("Presione cualquier tecla para salir...");
+//             Console.ReadKey();
+//         }
+//     }
+// }
 
 
 //----------------------------------------------------------------------------------------------------------------------
