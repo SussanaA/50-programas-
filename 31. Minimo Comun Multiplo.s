@@ -64,105 +64,96 @@
 
 .global _start
 
-.section .bss
-    numero1: .skip 8              // Reservar espacio para un entero de 64 bits
-    numero2: .skip 8              // Reservar espacio para un entero de 64 bits
-    mcm: .skip 8                  // Reservar espacio para el resultado del MCM
-
-.section .text
-
-_start:
-    // Imprimir mensaje de bienvenida
-    mov x0, 1                     // File descriptor STDOUT
-    ldr x1, =msg1                  // Mensaje a imprimir
-    mov x2, 42                     // Longitud del mensaje
-    mov x8, 64                     // Syscall number para write
-        svc 0
-
-    // Solicitar el primer número
-    mov x0, 1                     // File descriptor STDOUT
-    ldr x1, =msg2                  // Mensaje para primer número
-    mov x2, 27                     // Longitud del mensaje
-    mov x8, 64                     // Syscall number para write
-    svc 0
-
-    // Leer el primer número
-    mov x0, 0                     // File descriptor STDIN
-    ldr x1, =numero1               // Dirección de la variable numero1
-    mov x2, 8                      // Leer un entero de 8 bytes (64 bits)
-    mov x8, 63                     // Syscall number para read
-    svc 0
-    // Leer el primer número
-    mov x0, 0                     // File descriptor STDIN
-    ldr x1, =numero1               // Dirección de la variable numero1
-    mov x2, 8                      // Leer un entero de 8 bytes (64 bits)
-    mov x8, 63                     // Syscall number para read
-    svc 0
-
-    // Solicitar el segundo número
-    mov x0, 1                     // File descriptor STDOUT
-    ldr x1, =msg3                  // Mensaje para segundo número
-    mov x2, 28                     // Longitud del mensaje
-    mov x8, 64                     // Syscall number para write
-    svc 0
-
-    // Leer el segundo número
-    mov x0, 0                     // File descriptor STDIN
-    ldr x1, =numero2               // Dirección de la variable numero2
-    mov x2, 8                      // Leer un entero de 8 bytes (64 bits)
-    mov x8, 63                     // Syscall number para read
-    svc 0
-        // Calcular el MCM
-    adr x1, numero1               // Cargar la dirección de numero1 en x1
-    ldr x0, [x1]                  // Cargar el valor de numero1 en x0
-
-    adr x1, numero2               // Cargar la dirección de numero2 en x1
-    ldr x1, [x1]                  // Cargar el valor de numero2 en x1
-
-
-    bl CalcularMCM                // Llamar a la función CalcularMCM
-    adr x1, mcm                   // Cargar la dirección de mcm en x1
-    str x0, [x1]                  // Guardar el valor de x0 (resultado) en mcm
-
-    // Imprimir el resultado
-    mov x0, 1                     // File descriptor STDOUT
-    ldr x1, =msg4                  // Mensaje para resultado
-    mov x2, 48                     // Longitud del mensaje
-    mov x8, 64                     // Syscall number para write
-    svc 0
-        // Salir del programa
-    mov x8, 93                     // Syscall number para exit
-    mov x0, 0                      // Código de salida
-    svc 0
-
-// Función CalcularMCD
-CalcularMCD:
-    // Algoritmo de Euclides para el MCD
-    cmp x1, #0                    // Comparar b con 0
-    beq fin_mcd                   // Si b == 0, terminar
-    mov x2, x0                    // Guardar a en x2
-    mov x0, x1                    // a = b
-    mov x1, x2                    // b = residuo (guardado en x2)
-    bl CalcularMCD                // Llamar recursivamente
-fin_mcd:
-    ret
-
-// Función CalcularMCM
-CalcularMCM:
-    // MCM = (a * b) / MCD(a, b)
-    mov x2, x0                    // Guardar a en x2
-    mov x3, x1                    // Guardar b en x3
-    bl CalcularMCD                // Calcular el MCD
-    mul x0, x2, x3                // Multiplicar a * b
-    sdiv x0, x0, x1               // Dividir (a * b) / MCD
-    ret
-
-// Mensajes de texto
 .section .data
-msg1: .asciz "=== Cálculo del Mínimo Común Múltiplo (MCM) ===\n"
-msg2: .asciz "Ingrese el primer número: "
-msg3: .asciz "Ingrese el segundo número: "
-msg4: .asciz "El Mínimo Común Múltiplo es: "
+msg1: .ascii "El MCM de 15 y 93 es: "
+len1 = . - msg1
+buffer: .skip 20
+newline: .ascii "\n"
+
+.text
+_start:
+    // Números de entrada (15 y 93)
+    mov x1, #15     // Primer número en x1
+    mov x2, #93     // Segundo número en x2
+    
+    // Guardar copias de los números originales
+    mov x19, x1     // Backup de primer número
+    mov x20, x2     // Backup de segundo número
+
+calcular_mcd:
+    // Si x2 es cero, x1 tiene el MCD
+    cbz x2, calcular_mcm
+    
+    // Algoritmo de Euclides para MCD
+    mov x3, x1      // Temporal para x1
+    mov x1, x2      // x1 = x2
+    udiv x4, x3, x2 // x4 = x3 div x2
+    msub x2, x4, x2, x3 // x2 = x3 - (x4 * x2) [resto]
+    b calcular_mcd
+
+calcular_mcm:
+    // MCM = (a * b) / MCD
+    // x1 contiene el MCD en este punto
+    mov x3, x1          // Guardar MCD
+    mul x4, x19, x20    // x4 = a * b
+    udiv x0, x4, x3     // x0 = (a * b) / MCD
+
+    // Imprimir mensaje inicial
+    mov x0, #1          // stdout
+    ldr x1, =msg1       // puntero al mensaje
+    mov x2, len1        // longitud del mensaje
+    mov x8, #64         // syscall write
+    svc #0
+
+    // Convertir MCM a string
+    ldr x1, =buffer     // puntero al buffer
+    mov x2, x4          // número a convertir (a * b)
+    udiv x2, x2, x3     // dividir por MCD para obtener MCM
+    mov x4, #0          // contador de dígitos
+
+convertir_loop:
+    mov x3, #10
+    udiv x5, x2, x3     // dividir por 10
+    msub x6, x5, x3, x2 // obtener resto
+    add x6, x6, #'0'    // convertir a ASCII
+    strb w6, [x1, x4]   // guardar dígito
+    add x4, x4, #1      // incrementar contador
+    mov x2, x5          // actualizar número
+    cbnz x2, convertir_loop
+
+    // Invertir string
+    mov x5, #0          // índice inicio
+    sub x6, x4, #1      // índice final
+invertir:
+    cmp x5, x6
+    bge imprimir_resultado
+    ldrb w7, [x1, x5]   // cargar byte inicio
+    ldrb w8, [x1, x6]   // cargar byte final
+    strb w8, [x1, x5]   // guardar final en inicio
+    strb w7, [x1, x6]   // guardar inicio en final
+    add x5, x5, #1      // incrementar inicio
+    sub x6, x6, #1      // decrementar final
+    b invertir
+
+imprimir_resultado:
+    // Imprimir número
+    mov x0, #1          // stdout
+    ldr x1, =buffer     // puntero al buffer
+    mov x2, x4          // longitud del número
+    mov x8, #64         // syscall write
+    svc #0
+
+    // Imprimir nueva línea
+    mov x0, #1          // stdout
+    ldr x1, =newline    // puntero a nueva línea
+    mov x2, #1          // longitud = 1
+    mov x8, #64         // syscall write
+    svc #0
+
+exit:
+    mov x0, #0          // código de retorno
+    mov x8, #93         // syscall exit
+    svc #0
 
 //-----------------------------------------------------------------------------------------------------------------------
 
@@ -192,7 +183,7 @@ msg4: .asciz "El Mínimo Común Múltiplo es: "
 
 //------------------------------------------------------------------------------------------------------------------------
 // Enlace de asciinema
-
+https://asciinema.org/a/w1PvNGc1XgCjcutAN9VXvQrzW
 
 
 
