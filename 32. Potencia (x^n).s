@@ -9,7 +9,34 @@
 //----------------------------------------------------------------------------------------------------------------------
 // Código en C#
 
+// using System;
 
+// namespace Potencia
+// {
+//     class Program
+//     {
+//         static void Main(string[] args)
+//         {
+//             // Solicitar la base
+//             Console.Write("Ingrese el valor de la base (x): ");
+//             double baseX = Convert.ToDouble(Console.ReadLine());
+
+//             // Solicitar el exponente
+//             Console.Write("Ingrese el valor del exponente (n): ");
+//             int exponenteN = Convert.ToInt32(Console.ReadLine());
+
+//             // Calcular la potencia
+//             double resultado = Math.Pow(baseX, exponenteN);
+
+//             // Mostrar el resultado
+//             Console.WriteLine($"El resultado de {baseX}^{exponenteN} es: {resultado}");
+
+//             // Esperar a que el usuario presione una tecla para salir
+//             Console.WriteLine("Presione cualquier tecla para salir...");
+//             Console.ReadKey();
+//         }
+//     }
+// }
 
 //----------------------------------------------------------------------------------------------------------------------
 // Código en ensamblador ARM64
