@@ -9,6 +9,30 @@
 //----------------------------------------------------------------------------------------------------------------------
 // Código en C#
 
+// using System;
+
+// namespace BinarioADecimal
+// {
+//     class Program
+//     {
+//         static void Main(string[] args)
+//         {
+//             // Solicitar al usuario que ingrese un número binario
+//             Console.Write("Ingrese un número binario: ");
+//             string binario = Console.ReadLine();
+
+//             // Convertir el número binario a decimal
+//             int decimalResult = Convert.ToInt32(binario, 2);
+
+//             // Mostrar el resultado
+//             Console.WriteLine($"El número binario {binario} en decimal es: {decimalResult}");
+
+//             // Esperar a que el usuario presione una tecla para salir
+//             Console.WriteLine("Presione cualquier tecla para salir...");
+//             Console.ReadKey();
+//         }
+//     }
+// }
 
 
 //----------------------------------------------------------------------------------------------------------------------
