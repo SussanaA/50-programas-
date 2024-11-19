@@ -9,6 +9,39 @@
 //----------------------------------------------------------------------------------------------------------------------
 // Código en C#
 
+// using System;
+
+// namespace HexadecimalToDecimal
+// {
+//     class Program
+//     {
+//         static void Main(string[] args)
+//         {
+//             // Solicitar al usuario ingresar un número hexadecimal
+//             Console.Write("Ingrese un número en formato hexadecimal: ");
+//             string hexNumber = Console.ReadLine();
+
+//             // Intentar convertir el número hexadecimal a decimal
+//             try
+//             {
+//                 // Convertir el número hexadecimal a decimal
+//                 int decimalNumber = Convert.ToInt32(hexNumber, 16);
+
+//                 // Mostrar el resultado
+//                 Console.WriteLine($"El número hexadecimal {hexNumber} en decimal es: {decimalNumber}");
+//             }
+//             catch (FormatException)
+//             {
+//                 // Si ocurre un error en la conversión, mostrar un mensaje
+//                 Console.WriteLine("El número ingresado no es válido en formato hexadecimal.");
+//             }
+
+//             // Esperar a que el usuario presione una tecla para cerrar
+//             Console.WriteLine("Presione cualquier tecla para salir...");
+//             Console.ReadKey();
+//         }
+//     }
+// }
 
 
 //----------------------------------------------------------------------------------------------------------------------
