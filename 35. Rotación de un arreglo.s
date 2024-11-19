@@ -319,7 +319,7 @@ fin_restaurar:
 //------------------------------------------------------------------------------------------------------------------------
 // Enlace de asciinema
 
-
+https://asciinema.org/a/8Ki6rCdXjrytdIhXCd1XMOS6u
 
 
 
