@@ -20,19 +20,19 @@
 // Comandos para ejecutar el programa
 
 // Ensamblar el código
-// as -o aox.o aox.s
+// as -o id.o id.s
 
 // Vincular el archivo objeto
-// ld -o aox aox.o
+// ld -o id id.o
 
 // Ejecutar el programa
-//  ./aox
+//  ./id
 
 //-----------------------------------------------------------------------------------------------------------------------
 
 // Comandos para ejecutar en gdb
 
-// gdb -q aox
+// gdb -q id
 
 // start
 
