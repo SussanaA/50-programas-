@@ -9,6 +9,43 @@
 //----------------------------------------------------------------------------------------------------------------------
 // Código en C#
 
+// using System;
+
+// namespace DesbordamientoSuma
+// {
+//     class Program
+//     {
+//         static void Main(string[] args)
+//         {
+//             // Pedir al usuario dos números
+//             Console.Write("Ingrese el primer número: ");
+//             int numero1 = int.Parse(Console.ReadLine());
+
+//             Console.Write("Ingrese el segundo número: ");
+//             int numero2 = int.Parse(Console.ReadLine());
+
+//             // Intentar realizar la suma y detectar desbordamiento
+//             try
+//             {
+//                 int resultado = SumarConDesbordamiento(numero1, numero2);
+//                 Console.WriteLine("El resultado de la suma es: " + resultado);
+//             }
+//             catch (OverflowException)
+//             {
+//                 Console.WriteLine("¡Error de desbordamiento! La suma excede los límites de un número entero.");
+//             }
+//         }
+
+//         static int SumarConDesbordamiento(int num1, int num2)
+//         {
+//             // Intentar realizar la suma
+//             checked  // Activa la detección de desbordamiento
+//             {
+//                 return num1 + num2;
+//             }
+//         }
+//     }
+// }
 
 
 //----------------------------------------------------------------------------------------------------------------------
