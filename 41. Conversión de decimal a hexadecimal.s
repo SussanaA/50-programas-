@@ -9,6 +9,30 @@
 //----------------------------------------------------------------------------------------------------------------------
 // Código en C#
 
+// using System;
+
+// namespace DecimalToHexadecimal
+// {
+//     class Program
+//     {
+//         static void Main(string[] args)
+//         {
+//             // Solicitar al usuario que ingrese un número decimal
+//             Console.Write("Ingresa un número decimal: ");
+//             int decimalNumber = Convert.ToInt32(Console.ReadLine());
+
+//             // Convertir el número decimal a hexadecimal
+//             string hexadecimalNumber = Convert.ToString(decimalNumber, 16).ToUpper();
+
+//             // Mostrar el resultado
+//             Console.WriteLine("El número en hexadecimal es: " + hexadecimalNumber);
+
+//             // Esperar a que el usuario presione una tecla para cerrar
+//             Console.WriteLine("Presione cualquier tecla para salir...");
+//             Console.ReadKey();
+//         }
+//     }
+// }
 
 
 //----------------------------------------------------------------------------------------------------------------------
